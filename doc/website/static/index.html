@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+        <link rel="stylesheet" type="text/css" href="styles/reset.css">
+        <link rel="stylesheet" type="text/css" href="styles/style.css">
+        <link rel="stylesheet" href="styles/prettify.css" type="text/css" media="screen" title="no title" charset="utf-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+        <script src="js/prettify.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" src="js/site.js"></script>
+		<title>Node.js</title>
+</head>
+<body class="green">    
+<div id="wrapper">
+    <div id="innerwrap">
+        <div id="header">
+            <div class="floatleft notext"><a href="/" id="logo">Node.js</a></div>
+            <ul id="nav">
+                <li class="navitem"><a href="about.html">About</a></li>
+                <li class="navitem"><a href="documentation.html">Documentation</a></li>
+                <li class="navitem"><a href="benchmarks.html">Benchmarks</a></li>
+                <li class="navitem"><a href="contributions.html">Contributions</a></li>
+                <li class="navitem"><a href="resources.html">Resources</a></li>
+                <li class="navitem themetext"><a id="toggleirc" href="#"><img src="images/ircbubble.png" alt="irc">&nbsp;Read the IRC Channel</a></li>
+            </ul>
+        </div>
+        <div class="clearboth"></div>
+
+        <div id='irc'>
+           <div class="console">
+	       </div>
+	    </div>
+	
+		<div id="content">
+			<div class="shadowed" id="home_call">
+                Node makes it easy<br>
+                to build scalable<br>
+                network programs<br>
+                through Evented I/O<br>
+                for Javascript. <span class="small mono alignright"><a href="about.html">Learn More &gt;</a></span>
+            </div>
+            <div id="home_toprightp">
+                <p>
+                    Node's goal is to provide an easy way to build scalable network programs. In the following example, the two second delay does not prevent the server from handling new requests. Node tells the operating system (through <span class="mono">epoll, kqueue, /dev/poll,</span> or <span class="mono">select</span>) that it should be notified when the 2 seconds are up or if a new connection is made-then it goes to sleep. If someone new connects, then it executes the callback, if the timeout expires, it executes the inner callback. Each connection is only a small heap allocation.
+                </p>
+                <a id="downloadlink" class="themebackground" href="#"><div class="dlarrow notext">Download Node.js</div><div class='versioninfo'>Version 0.2.0</div></a>
+                <div id='buildinfo'><p>./configure<br/>make<br/>make install</p></div>
+				<div class="clearboth"></div>
+                <div id="homecallouts" class="dot">
+                    <span class="floatleft">Works on:</span>
+					<img src='/images/workson.png' />
+                    <span class="floatright mono"><a href="#" id="viewdeps">+ View Dependencies</a></span>
+                    <div id="deplocation"><div class="shadowed lightbackground dependencies">The build system requires Python 2.4 or better. V8, on which Node is built, supports only IA-32 and ARM processors. V8 is included in the Node distribution. To use TLS, GnuTLS and libgpg-error are required. There are no other dependencies.<div class="thinkbubble"></div></div></div>
+			<div class="clearboth"></div>
+                </div>
+            </div>
+
+        <div class="breaker"></div>
+<div id="home_examples" class="ml20">
+<p>
+An example of a web server written with Node which responds with "Hello World" after waiting two seconds:
+<code class="prettyprint">
+var sys = require('sys'),<br>
+    http = require('http');<br>
+    http.createServer(function (req, res) {<br>
+        setTimeout(function () {<br>
+            res.writeHead(200, {'Content-Type': 'text/plain'});<br>
+            res.end('Hello World\n');<br>
+        }, 2000);<br>
+    }).listen(8000);<br>
+sys.puts('Server running at http://127.0.0.1:8000/');<br>
+</code>
+To run the server, put the code into a file example.js and execute it with the node program.
+<code class="prettyprint">
+% node example.js<br>
+Server running at http://127.0.0.1:8000/
+</code>
+</p>
+
+<p class="top46 dot bottom46">
+An example of a simple TCP server which listens on port 7000 and echos whatever you send it:
+<code class="prettyprint lang-js">
+    var tcp = require('tcp');<br>
+    var server = tcp.createServer(function (socket) {<br>
+        socket.setEncoding("utf8");<br>
+        socket.addListener("connect", function () {<br>
+            socket.write("hello\r\n");<br>
+        });<br>
+        socket.addListener("data", function (data) {<br>
+            socket.write(data);<br>
+        });<br>
+        socket.addListener("end", function () {<br>
+            socket.write("goodbye\r\n");<br>
+            socket.end();<br>
+        });<br>
+    });<br>
+    server.listen(7000, "localhost");<br>
+</code>
+</p>
+</div><!-- end examples -->
+</div><!-- end #content -->
+</div><!-- end #innerwrap -->
+<div id="footer" class="mono small">
+    <span class="ml20">&copy; NODE.JS All rights reserved. Site by <a href="http://thisismedium.com" class="themetext">medium.</a></span>
+    <div class="floatright">
+        <ul id="bottomnav">
+        <li class="navitem floatleft"><a href="about.html">About</a></li>
+        <li class="navitem floatleft"><a href="documentation.html">Documentation</a></li>
+        <li class="navitem floatleft"><a href="benchmarks.html">Benchmarks</a></li>
+        <li class="navitem floatleft"><a href="contributions.html">Contributions</a></li>
+        <li class="navitem floatleft"><a href="resources.html">Resources</a></li>
+        </ul>
+    </div>
+</div>
+</div><!-- end #wrapper -->
+</body>
+</html>

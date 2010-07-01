@@ -1,0 +1,504 @@
+/*
+	colors:
+	green: #008000
+	blue: #0000c0
+	red: #da0000;
+	background white: #e8e8e8
+	fonts used: monaco, arial
+*/
+
+/*----------------------*/
+/*------TYPOGRAPHY------*/
+/*----------------------*/
+html body {
+	background: url('../images/bg.png') fixed repeat;
+	height: 100%;
+	font-family: arial, Helvetica, sans-serif;
+	font-size: 1em;
+	line-height: 1.2em;
+}
+
+p em, em {
+	font-style: italic;
+}
+
+p {
+	margin-bottom: 16px;
+}
+
+li, p, span {
+	font-size: 9pt;
+}
+
+p a, li a {
+	text-decoration: underline;
+}
+
+ol {
+	list-style: inside decimal;
+}
+ul {
+	list-style: square inside;
+}
+ol li ul {
+	text-indent: 20px;
+}
+
+code {
+	font-family: "Monaco", Courier New, Courier, monospace;
+}
+
+/*Typography*/
+h1, h2, h3, h4, h5, h6 {
+	font-family: Helvetica, arial, sans-serif;
+}
+
+h1 {
+	font-size: 2.2em;
+	line-height: 35pt;
+	margin-bottom: 16px;
+}
+
+h2 {
+
+}
+
+h3 {
+	font-weight: bold;
+	font-size: 12px;
+}
+
+h4 {
+
+}
+
+h5 {
+
+}
+
+h6 {
+
+}
+
+
+
+a {
+	color: #000;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+/*----------------------*/
+/*-------TOOLBOX--------*/
+/*----------------------*/
+.floatleft {
+	float: left;
+}
+
+.floatright {
+	float: right;
+}
+
+.hidden {
+	display: none;
+}
+
+.clearboth {
+	clear: both;
+}
+
+
+.blue .themetext, .blue .themetext a, .blue p a:hover, .blue li a:hover, .blue #irc .console time, .blue #irc .console .who, .blue #irc .console .info {
+	color: #0000c0;
+}
+
+.blue .themebackground {
+    background-color: #0000c0;
+}
+
+
+.green .themetext, .green .themetext a, .green p a:hover, .green li a:hover, .green #irc .green time, .green #irc .console .who, .green #irc .console .info  {
+	color: #008000;
+}
+
+.green .themebackground {
+    background-color: #008000;
+}
+
+.red .themebackground {
+    background-color: #da0000;
+}
+
+.red .themetext, .red .themetext a, .red p a:hover, .red li a:hover, .red #irc .console time, .red #irc .console .who, .red #irc .console .info {
+	color: #da0000;
+}
+
+.notext {
+	text-indent: -9999px;
+}
+.strong {
+	font-weight: bold;
+}
+/*----------------------*/
+/*---Utility Classes----*/
+/*----------------------*/
+
+div.breaker {
+	height: 1px;
+	width: 980px;
+	padding-right: 100px;
+	background-color: #666666;
+	clear: both;
+	margin: 46px 0px 46px -20px;
+}
+div.shadowed {
+	background-color: #e8e8e8;
+	border: 1px solid #000;
+	top: -10px;
+	left: -10px;
+	position: relative;
+	z-index: 600;
+}
+div.shadow {
+	background: url('../images/bg.png') fixed;
+	display: block;
+	float: left;
+	position: relative;
+	top: 10px;
+	left: 10px;
+	z-index: 500;
+}
+
+.dot { border-top: 1px dotted #000; }
+
+.mono, .mono.small { font-family: "Monaco", Courier New, Courier, monospace; }
+.small, code, .small span { font-size: 10px; }
+.uppercase { text-transform: uppercase; }
+
+.right-20 { margin-right: -20px; }
+.left-20 { margin-left: -20px; }
+
+.top10 { position: relative; top: 10px; }
+.top14 { margin-top: 14px; padding-top: 14px; line-height: 1em; }
+.top20 { margin-top: 0px; padding-top: 20px;}
+.top30 { margin-top: 30px; padding-top: 30px; }
+.top46 { margin-top: 46px; padding-top: 46px; }
+
+.bottom14{ margin-bottom: 14px; }
+.bottom30{ margin-bottom: 30px; }
+.bottom46{ margin-bottom: 46px; }
+
+.w660 { width: 660px; }
+.w542 { width: 542px; }
+.w368 { width: 368px; }
+.w270 { width: 270px; }
+.w174 { width: 174px; }
+.ml20 { margin-left: 20px; }
+.mr20 { margin-right: 20px; }
+.pl20 { padding-left: 20px; }
+.pr20 { padding-right: 20px; }
+
+.prettyprint {
+	clear: both;
+	display: block;
+	margin: 20px 0px;
+	font-size: 12px;
+	background-color: #fbfbfb;
+	padding: 20px;
+}
+
+/*----------------------*/
+/*------STRUCTURE-------*/
+/*----------------------*/
+div#wrapper {
+	background: url('../images/wrapperbg.png') #e8e8e8;
+	display: block;
+	width: 1080px;
+	min-height: 900px;
+}
+
+div#wrapper div#innerwrap {
+	width: 980px;
+	padding-bottom: 30px;
+}
+
+div#wrapper div#innerwrap div#header {
+	height: 70px;
+	width: 100%;
+	padding-right: 100px;
+}
+
+div#wrapper div#innerwrap div#header ul#nav {
+	float: right;
+	position: relative;
+	display: block;
+	top: 40px;
+}
+ul#nav a, ul#bottomnav a {
+	text-decoration: none;
+}
+div#wrapper div#innerwrap div#header ul#nav a:hover, ul#bottomnav a:hover{
+	text-decoration: underline;
+}
+ul#bottomnav {
+	float: right;
+	position: relative;
+	margin-right: 100px;
+}
+
+li.navitem {
+	font-size: 10px;
+	margin-left: 25px;
+	float: left;
+	display: inline;
+	font-family: "Monaco", Courier New, Courier, monospace;
+}
+
+#toggleirc img {
+    width: 12px;
+    height: 11px;
+    margin-bottom: -3px;
+    margin-right: -2;
+}
+
+div#wrapper div#innerwrap div#content {
+	padding-top: 30px;
+	margin: 10px 20px;
+
+}
+
+div#wrapper div#footer {
+	width: 100%;
+	border-top: 1px solid #000;
+	padding: 8px 0px 8px 0px;
+}
+
+div#home_call {
+	font-family: Helvetica;
+	width: 410px;
+	font-size: 43px;
+	line-height: 46px;
+	padding: 15px;
+}
+a#logo {
+	color: #fff;
+	background-image: url('../images/logo.png');
+	position: absolute;
+	top: 14px;
+	left: 20px;
+	width: 138px;
+	height: 40px;
+}
+
+.genericcallout {
+    background-color: #666666;
+    padding-top: 17px;
+    margin-bottom: 4px;
+	width: 194px;
+	height: 35px;
+	display: block;
+	color: #fff;
+	text-align: center;
+	font-size: 14px;
+	font-family: "Monaco", Courier New, Courier, monospace;
+	overflow: hidden;
+	float:left;
+    text-decoration: none !important;
+}
+#downloadlink{
+	width: 194px;
+	height: 67px;
+	display: block;
+	color: #fff;
+	padding-top: 1px;
+	overflow: hidden;
+	float:left;
+    text-decoration: none;
+}
+#downloadlink .dlarrow {
+    background: url('../images/download.png') no-repeat;
+    margin-top: 15px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+#downloadlink:hover, .genericcallout:hover {
+    background-color: black;
+    cursor: pointer;
+}
+#downloadlink .versioninfo{
+    font-family: "Monaco", Courier New, Courier, monospace;
+    font-size: 10px;
+    margin-left: 40px;
+}
+
+#homecallouts{
+    margin-top: 20px;
+    padding-top: 7px;
+    padding-bottom: 5px;
+    line-height: 34px;
+    height: 53px;
+}
+
+#homecallouts span{
+    font-size: 11px;
+}
+
+#homecallouts img{
+    margin-left: 15px;
+}
+
+#deplocation {
+    position: absolute;
+    margin-top: -147px;
+    margin-left: 320px;
+    padding:0;
+    display: none;
+}
+
+.dependencies {
+    display: block;
+    width: 275px;
+    font-size: 11px;
+    line-height: 14px;
+    padding: 12px;
+    background-color: #f2f2f2;
+}
+
+.thinkbubble{
+    background-image: url("../images/thinkbubble.png");
+    z-index: 600;
+    width: 17px;
+    height: 26px;
+}
+
+.dependencies .thinkbubble{
+    position: absolute;
+    margin-left: 52px;
+    margin-top: 12px;
+}
+
+#buildinfo{
+    display: block;
+    width: 111px;
+    height: 68px;
+    background-color: #666666;
+    margin-left: 1px;
+    float:left;
+    overflow: hidden;
+}
+
+#buildinfo p{
+    display: block;
+    font-family: "Monaco", Courier New, Courier, monospace;
+    font-size: 9px;
+    color: #FFFFFF;
+    line-height: 12px;
+    margin-left: 20px;
+    padding-top: 6px;
+}
+
+div#home_toprightp {
+	width: 460px;
+	display: block;
+	float: right;
+	margin-left: 20px;
+}
+div#home_toprightp p{
+	margin-top: 10px;
+}
+
+div.resourceli, div.resourceli p {
+	font-size: 12px;
+}
+div#maincontent {
+	width: 680px;
+	padding-right: 20px;
+}
+
+ul#documentation {
+	cursor: pointer;
+}
+
+ul#documentation li, ul#documentation li ul li{
+	list-style: none;
+	font-size: 10px;
+}
+
+ul#documentation li ul {
+	margin: 10px -20px -10px -20px;
+}
+
+ul#documentation li ul li {
+	border-top: 1px dotted #666;
+	border-bottom: none;
+	padding-left: 30px;
+}
+
+ul#documentation li {
+	border-bottom: 1px #666 dotted;
+	padding: 10px 20px;
+}
+
+ul#documentation li strong {
+	font-weight: bold;
+	margin-left: -12px;
+	margin-right: 5px;
+}
+#wrapper #innerwrap a.active, #wrapper #footer a.active {
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+#documentation_content div {
+	position: relative;
+}
+
+#documentation_content div .nametags {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+}
+#documentation_content div .nametags span {
+	border-left: 1px #666 solid;
+	border-right: 1px #666 solid;
+	border-bottom: 1px #666 solid;
+	margin-left: 10px;
+	position: relative;
+	top: 6px;
+	padding: 8px 8px 8px 8px;
+	font-size: 8pt;
+}
+#documentation_content div .nametags span.docname {
+	top: 5px;
+	padding-bottom: 10px;
+}
+
+#irc {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    width: 1080px;
+    overflow: hidden;
+    margin-top: 0px;
+    height: 1px;
+}
+
+#irc .console {
+    padding: 20px;
+    min-height: 330px;
+    font-family: "Monaco", Courier New, Courier, monospace;
+}
+
+#irc .console p {
+    margin: 0;
+    padding: 0;
+    font-size: 11px;
+    line-height: 15px;
+}
+
+
+#irc .console time {
+    margin-right: 0.5em;
+}

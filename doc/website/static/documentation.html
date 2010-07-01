@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+        <link rel="stylesheet" type="text/css" href="styles/reset.css">
+        <link rel="stylesheet" type="text/css" href="styles/style.css">
+        <link rel="stylesheet" href="styles/prettify.css" type="text/css" media="screen" title="no title" charset="utf-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+        <script src="js/prettify.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" src="js/site.js"></script>
+		<title>Node.js</title>
+</head>
+<body class="green">    
+<div id="wrapper">
+    <div id="innerwrap">
+        <div id="header">
+            <div class="floatleft notext"><a href="/" id="logo">Node.js</a></div>
+            <ul id="nav">
+                <li class="navitem"><a href="about.html">About</a></li>
+                <li class="navitem"><a href="documentation.html">Documentation</a></li>
+                <li class="navitem"><a href="benchmarks.html">Benchmarks</a></li>
+                <li class="navitem"><a href="contributions.html">Contributions</a></li>
+                <li class="navitem"><a href="resources.html">Resources</a></li>
+                <li class="navitem themetext"><a id="toggleirc" href="#"><img src="images/ircbubble.png" alt="irc">&nbsp;Read the IRC Channel</a></li>
+            </ul>
+        </div>
+		<div class="clearboth"></div>
+        <div id='irc'>
+           <div class="console">
+	       </div>
+	    </div>
+        <div id="content">
+			<div id="docdrawer" class="w174 shadowed floatleft">
+				<ul id="documentation">
+					<li>NAME</li>
+					<li>Synopsis</li>
+					<li>Standard Modules</li>
+					<li>Buffers</li>
+					<li><strong>+</strong>
+						EventEmitter
+						<ul>
+							<li>Event: 'newListener'</li>
+							<li>emitter.addListener</li>
+							<li>emitter.removeListener</li>
+							<li>emitter.removeAllListeners</li>
+							<li>emitter.listeners</li>
+							<li>emitter.emit</li>
+						</ul>
+					</li>
+					<li>Streams</li>
+					<li>Readable Stream</li>
+					<li><strong>+</strong>Writable Stream</li>
+					<li><strong>+</strong>Global Objects</li>
+					<li><strong>+</strong>process</li>
+					<li><strong>+</strong>sys</li>
+					<li><strong>+</strong>Timers</li>
+					<li><strong>+</strong>Child Processes</li>
+					<li><strong>+</strong>Script</li>
+					<li><strong>+</strong>File System</li>
+					<li>fs.Stats</li>
+					<li>fs.ReadStream</li>
+					<li><strong>+</strong>fs.WriteStream</li>
+					<li>HTTP</li>
+					<li>http.Server</li>
+					<li><strong>+</strong>http.ServerRequest</li>
+					<li><strong>+</strong>http.ServerResponse</li>
+					<li><strong>+</strong>http.Client</li>
+					<li><strong>+</strong>http.ClientRequest</li>
+					<li><strong>+</strong>http.ClientResponse</li>
+					<li><strong>+</strong>net.Server</li>
+					<li><strong>+</strong>net.Stream</li>
+					<li><strong>+</strong>DNS</li>
+					<li><strong>+</strong>Assert</li>
+					<li><strong>+</strong>Path</li>
+					<li><strong>+</strong>URL</li>
+					<li><strong>+</strong>Query String</li>
+					<li><strong>+</strong>REPL</li>
+					<li>Modules</li>
+					<li>Addons</li>
+				</ul>
+			</div>
+			<div id="documentation_content" class="w660 left-20 right-20 floatright">
+				<h1>Documentation</h1>
+				<div class="top16">
+					<h3 class="uppercase">Name</h3>
+					<p class="bottom30">node -- evented I/O for V8 JavaScript</p>
+				</div>
+				<div class="top46 dot">
+					<h3 class="uppercase">Synopsis</h3>
+					<div class="nametags"><span class="docname uppercase">synopsis</span><span class="toTop mono"><a href="#">Edit</a> | <a href="#">Back to Top</a></span></div>
+					<p>An example of a web server written with Node which responds with "Hello World" after waiting two seconds:</p>
+<code class="prettyprint">var sys = require('sys'),<br>
+   http = require('http');<br>
+http.createServer(function (req, res) {<br>
+  setTimeout(function () {<br>
+    res.writeHead(200, {'Content-Type': 'text/plain'});<br>
+    res.end('Hello World\n');<br>
+  }, 2000);<br>
+}).listen(8000);<br>
+sys.puts('Server running at http://127.0.0.1:8000/');
+</code>
+
+					<p>To run the server, put the code into a file example.js and execute it with the node program.</p>
+<code class="prettyprint">% node example.js<br>
+Server running at http://127.0.0.1:8000/
+</code>
+
+				<p>All of the examples in the documentation can be run similarly.</p>
+				</div>
+				<div class="top46 dot">
+					<h3 class="uppercase">Standard Modules</h3>
+					<div class="nametags"><span class="docname uppercase">Standard Modules</span><span class="toTop mono"><a href="#">Edit</a> | <a href="#">Back to Top</a></span></div>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				</div>
+				<div class="top46 dot">
+					<h3 class="uppercase">Buffers</h3>
+					<div class="nametags"><span class="docname uppercase">Buffers</span><span class="toTop mono"><a href="#">Edit</a> | <a href="#">Back to Top</a></span></div>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				</div>
+			</div>
+			<div class="clearboth"></div>
+        </div>
+    </div><!-- end #innerwrap -->
+	<div class="clearboth"></div>
+    <div id="footer" class="mono small">
+        <span class="ml20">&copy; NODE.JS All rights reserved. Site by <a href="http://thisismedium.com" class="themetext">medium.</a></span>
+        <div class="floatright">
+	            <ul id="bottomnav">
+	            <li class="navitem floatleft"><a href="about.html">About</a></li>
+	            <li class="navitem floatleft"><a href="documentation.html">Documentation</a></li>
+	            <li class="navitem floatleft"><a href="benchmarks.html">Benchmarks</a></li>
+	            <li class="navitem floatleft"><a href="contributions.html">Contributions</a></li>
+	            <li class="navitem floatleft"><a href="resources.html">Resources</a></li>
+	            </ul>
+		</div>
+    </div>
+</div><!-- end #wrapper -->
+</body>
+</html>
