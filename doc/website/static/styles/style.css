@@ -12,11 +12,11 @@ p em, em {
 }
 
 p {
-    margin-bottom: 16px;
+    margin-bottom: 12px;
 }
 
 li, p, span {
-    font-size: 10pt;
+    font-size: 9pt;
 }
 
 p a, li a {
@@ -135,15 +135,6 @@ a:hover {
 /*---Utility Classes----*/
 /*----------------------*/
 
-div.breaker {
-    height: 1px;
-    width: 980px;
-    padding-right: 100px;
-    background-color: #666666;
-    clear: both;
-    margin: 46px 0px 46px -20px;
-}
-
 .shadow, .bubble-wrap {
     background: url('../images/bg.png') fixed;
     display: block;
@@ -177,6 +168,7 @@ div.breaker {
     top: 0;
     left: 0;
     float: right;
+    font-family: "Monaco", Courier New, Courier, monospace;
 }
 
 .bubble-activate {
@@ -205,6 +197,17 @@ div.breaker {
     z-index: 600;
     width: 17px;
     height: 26px;
+}
+
+.prettyprint {
+    clear: both;
+    margin: 10px 0 23px 0px;
+    font-size: 10px;
+    letter-spacing: -1px;
+    line-height: 19px;
+    background-color: #fbfbfb;
+    padding: 8px 15px;
+    border: 0;
 }
 
 .dot { border-top: 1px dotted #000; }
@@ -236,15 +239,6 @@ div.breaker {
 .pl20 { padding-left: 20px; }
 .pr20 { padding-right: 20px; }
 
-.prettyprint {
-    clear: both;
-    margin: 10px 0 25px 0px;
-    font-size: 12px;
-    background-color: #fbfbfb;
-    padding: 20px;
-    border: 0;
-}
-
 /*----------------------*/
 /*------STRUCTURE-------*/
 /*----------------------*/
@@ -258,7 +252,7 @@ body {
 #wrapper {
     background: url('../images/wrapperbg.png') #e8e8e8;
     display: block;
-    width: 1080px;
+    width: 1070px;
     min-height: 900px; /* FIXME: why is this here? */
 }
 
@@ -268,7 +262,7 @@ body {
     top: 0;
     left: 0;
     border-top: 1px solid black;
-    padding: 50px 100px 30px 20px;
+    padding: 45px 100px 45px 20px;
 }
 
 #header {
@@ -299,12 +293,12 @@ body {
     display: block;
     text-align: right;
     width: 100%;
-    padding-top: 39px;
+    padding-top: 40px;
 }
 
 .navitem {
     font-size: 10px;
-    margin-left: 25px;
+    margin-left: 18px;
     display: inline;
     font-family: "Monaco", Courier New, Courier, monospace;
 }
@@ -315,14 +309,6 @@ body {
 
 .navitem a:hover {
     text-decoration: underline;
-}
-
-#bottomnav {
-    display: inline;
-}
-
-#copyright {
-    float: left;
 }
 
 #toggleirc img {
@@ -358,10 +344,14 @@ body {
     margin-right: 0.5em;
 }
 
+#content {
+    padding-bottom: 16px;
+}
+
 .example {
     border-top: 1px dotted black;
-    margin-top: 46px;
-    padding-top: 30px;
+    margin-top: 40px;
+    padding-top: 26px;
 }
 
 .first-example {
@@ -371,28 +361,55 @@ body {
 }
 
 #footer {
-    padding-top: 8px;
+    padding-top: 5px;
     padding-bottom: 8px;
     text-align: right;
+    font-family: "Monaco", Courier New, Courier, monospace;
+    font-size: 10px;
+    letter-spacing: -1px;
+    /* Here's a weird problem in IE7: the default 1px border doesn't show
+       up.  With a 4px border, 1px is visible. */
+    *border-top: 4px solid black;
+}
+
+#bottomnav {
+    display: inline;
+}
+
+#bottomnav .navitem {
+    font-size: 11px;
+    margin-left: 20px
+}
+
+#copyright {
+    float: left;
+    font-size: inherit;
+    font-size: 11px;
 }
 
 #what-is-node {
     position: absolute;
-    top: 60px;
+    top: 58px;
     left: 30px;
 }
 
 #what-is-node .shadowed {
     font-family: Helvetica;
-    width: 410px;
+    width: 422px;
     font-size: 43px;
-    line-height: 43px;
-    padding: 15px;
+    line-height: 45px;
+    padding: 15px 15px 5px 15px;
+    *padding-bottom: 15px;
+}
+
+#learn-more {
+    font-size: 10px;
+    font-family: "Monaco", Courier New, Courier, monospace;
 }
 
 #describe-node {
     display: block;
-    margin-left: 470px;
+    margin-left: 487px;
     padding-top: 5px;
 }
 
@@ -412,24 +429,28 @@ body {
     text-decoration: none !important;
 }
 
+#describe-node p {
+    margin-bottom: 15px;
+    line-height: 19px;
+}
+
 #download {
-    width: 194px;
+    width: 188px;
     height: 67px;
     display: block;
     color: #fff;
-    padding-top: 1px;
+    padding: 0;
     overflow: hidden;
     float:left;
     text-decoration: none;
+    margin-right: 1px;
 }
 
 #download .dlarrow {
     display: block;
     background: url('../images/download.png') no-repeat;
     text-indent: -9999px;
-    margin-top: 17px;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin: 18px 20px 2px 20px;
 }
 
 #download:hover, .genericcallout:hover {
@@ -448,11 +469,10 @@ body {
 
 #build {
     display: block;
-    width: 111px;
-    height: 68px;
+    width: 110px;
+    height: 67px;
     background-color: #666666;
-    margin-left: 1px;
-    float:left;
+    float: left;
     overflow: hidden;
 }
 
@@ -461,22 +481,26 @@ body {
     font-family: "Monaco", Courier New, Courier, monospace;
     font-size: 10px;
     color: #FFFFFF;
-    line-height: 12px;
-    margin: 17px;
+    line-height: 13px;
+    margin: 14px 0 0 21px;
 }
 
 #works-on {
-    margin-top: 15px;
-    padding: 7px 0 0 0;
-    line-height: 34px;
+    border-top: 1px dotted black;
+    margin-top: 19px;
+    padding: 12px 0 0 0;
 }
 
-#works-on span {
-    font-size: 11px;
+#works-on .label {
+    font-size: 12px;
+    display: block;
+    float: left;
 }
 
-#works-on img {
-    margin-left: 15px;
+#works-on .logos {
+    float: left;
+    margin-top: -5px;
+    padding-left: 10px;
 }
 
 div.resourceli, div.resourceli p {
