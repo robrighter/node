@@ -23,9 +23,9 @@
       });
     }
 
-    $('.shadowed').each(function(){
-      $(this).wrap("<div class='shadow' />");
-    });
+    // $('.shadowed').each(function(){
+    //   $(this).wrap("<div class='shadow' />");
+    // });
 
     $("a").each(function(){
       var locindex = window.location.href.split('/').length -1;
@@ -39,12 +39,7 @@
         return false;
     });
 
-    $('#viewdeps').toggle(function(){
-       $('#deplocation').fadeIn('fast');
-    },
-    function(){
-       $('#deplocation').fadeOut('fast');
-    });
+    $('.bubble').each(bubble);
 
     function toggleIrc(){
       var collapse = '1px';
@@ -55,6 +50,26 @@
       return false;
     }
 
+  }
+
+  
+  /// --- Bubble
+
+  function bubble() {
+    var activate = $('.bubble-activate', this),
+        wrap = $('.bubble-wrap', this);
+
+    function show() {
+      wrap.css('top', -1 * wrap.outerHeight() - 10).fadeIn('fast');
+    }
+
+    function hide() {
+      wrap.fadeOut('fast');
+    }
+
+    activate.toggle(show, hide);
+
+    return this;
   }
 
   
@@ -224,7 +239,7 @@ function setTheme(name){
 }
 
 function ircUnavailable(){
-    $('#toggleirc').fadeOut('slow');
+    // $('#toggleirc').parent().fadeOut('slow');
 }
 
 function isIrcExpanded(){
