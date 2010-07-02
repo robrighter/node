@@ -12,7 +12,7 @@ p em, em {
 }
 
 p {
-    margin-bottom: 12px;
+    margin-bottom: 17px;
 }
 
 li, p, span {
@@ -45,7 +45,7 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
     font-size: 2.2em;
     line-height: 35pt;
-    margin-bottom: 16px;
+    margin: -5px 0 13px 0;
 }
 
 h2 {
@@ -201,7 +201,10 @@ a:hover {
 
 .prettyprint {
     clear: both;
-    margin: 10px 0 23px 0px;
+    margin: 0 0 15px 0;
+    position: relative;
+    top: -10px;
+    left: 0;
     font-size: 10px;
     letter-spacing: -1px;
     line-height: 19px;
@@ -263,6 +266,16 @@ body {
     left: 0;
     border-top: 1px solid black;
     padding: 45px 100px 45px 20px;
+}
+
+.column-1 {
+    margin-right: 270px;
+}
+
+.column-2 {
+    float: right;
+    width: 195px;
+    padding-top: 4px;
 }
 
 #header {
@@ -348,18 +361,6 @@ body {
     padding-bottom: 16px;
 }
 
-.example {
-    border-top: 1px dotted black;
-    margin-top: 40px;
-    padding-top: 26px;
-}
-
-.first-example {
-    border-top: none;
-    margin-top: 0;
-    padding-top: 0;
-}
-
 #footer {
     padding-top: 5px;
     padding-bottom: 8px;
@@ -367,8 +368,10 @@ body {
     font-family: "Monaco", Courier New, Courier, monospace;
     font-size: 10px;
     letter-spacing: -1px;
+
     /* Here's a weird problem in IE7: the default 1px border doesn't show
        up.  With a 4px border, 1px is visible. */
+
     *border-top: 4px solid black;
 }
 
@@ -385,6 +388,22 @@ body {
     float: left;
     font-size: inherit;
     font-size: 11px;
+}
+
+/*----------------------*/
+/*--------HOME----------*/
+/*----------------------*/
+
+.example {
+    border-top: 1px dotted black;
+    margin-top: 40px;
+    padding-top: 26px;
+}
+
+.first-example {
+    border-top: none;
+    margin-top: 0;
+    padding-top: 0;
 }
 
 #what-is-node {
@@ -413,7 +432,7 @@ body {
     padding-top: 5px;
 }
 
-.genericcallout {
+.callout {
     background-color: #666666;
     padding-top: 17px;
     margin-bottom: 4px;
@@ -435,25 +454,25 @@ body {
 }
 
 #download {
-    width: 188px;
+    width: 100%;
     height: 67px;
     display: block;
     color: #fff;
     padding: 0;
     overflow: hidden;
-    float:left;
     text-decoration: none;
     margin-right: 1px;
+    font-size: 12px;
 }
 
 #download .dlarrow {
     display: block;
     background: url('../images/download.png') no-repeat;
     text-indent: -9999px;
-    margin: 18px 20px 2px 20px;
+    margin: 18px 20px 2px 23px;
 }
 
-#download:hover, .genericcallout:hover {
+#download:hover, .callout:hover {
     background-color: black;
     cursor: pointer;
 }
@@ -464,6 +483,31 @@ body {
     font-size: 12px;
     line-height: 12px;
     letter-spacing: -1px;
+    margin-left: 42px;
+}
+
+#historical {
+    text-align: right;
+    margin-top: 5px;
+    font-size: 10px;
+    font-family: "Monaco", Courier New, Courier, monospace;
+}
+
+#historical .label {
+    font-family: arial, helvetica, sans-serif;
+    font-size: 13px;
+}
+
+#describe-node #download {
+    float:left;
+    width: 188px;
+}
+
+#describe-node #download .dlarrow {
+    margin-left: 20px;
+}
+
+#describe-node #download .version {
     margin-left: 40px;
 }
 
@@ -540,9 +584,8 @@ ul#documentation li strong {
     margin-left: -12px;
     margin-right: 5px;
 }
-#wrapper #innerwrap a.active, #wrapper #footer a.active {
+.navitem .active {
     text-decoration: underline;
-    font-weight: bold;
 }
 
 #documentation_content div {

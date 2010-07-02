@@ -23,10 +23,6 @@
       });
     }
 
-    // $('.shadowed').each(function(){
-    //   $(this).wrap("<div class='shadow' />");
-    // });
-
     $("a").each(function(){
       var locindex = window.location.href.split('/').length -1;
       var thelocation = window.location.href.split('/')[locindex];
