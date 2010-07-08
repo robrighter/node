@@ -547,6 +547,38 @@ body {
     padding-left: 10px;
 }
 
+
+/* --- Benchmarks --- */
+
+.benchmarks {
+    margin-bottom: 64px;
+}
+
+.benchmark {
+    border-top: 1px dotted black;
+    margin-top: 35px;
+    padding-top: 35px;
+}
+
+.first-benchmark {
+    border: none;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.benchmark .description {
+    margin-right: 600px;
+}
+
+.benchmark .graphic {
+    float: right;
+    margin-top: 4px;
+}
+
+.benchmark .end {
+    clear: both;
+}
+
 div.resourceli, div.resourceli p {
     font-size: 12px;
 }
