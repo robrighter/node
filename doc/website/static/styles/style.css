@@ -290,9 +290,13 @@ body {
     padding: 45px 100px 45px 20px;
 }
 
-.subsection {
+.subsection, .guidelines {
     border-top: 1px dotted black;
-    padding-top: 30px;
+    padding-top: 20px;
+}
+
+.guidelines {
+   padding-top: 30px;
 }
 
 .column-1 {
