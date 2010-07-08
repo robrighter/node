@@ -24,13 +24,22 @@ p a, li a {
 }
 
 ol {
-    list-style: inside decimal;
+    list-style: decimal;
+    padding-left: 18px;
+    letter-spacing: 0px;
+    line-height: 1.15em;
+    margin-bottom: 17px;
 }
+
 ul {
-    list-style: square inside;
+    list-style: disc;
+    padding-left: 18px;
+    margin-bottom: 17px;
 }
-ol li ul {
-    text-indent: 20px;
+
+ol ul, ul ol {
+    padding-left: 13px;
+    margin-bottom: 0;
 }
 
 pre, code {
@@ -199,8 +208,7 @@ a:hover {
     height: 26px;
 }
 
-.prettyprint {
-    clear: both;
+pre {
     margin: 0 0 15px 0;
     position: relative;
     top: -10px;
@@ -211,6 +219,20 @@ a:hover {
     background-color: #fbfbfb;
     padding: 8px 15px;
     border: 0;
+}
+
+pre.plain {
+    font-size: 14px;
+    padding: 11px 0 0px 15px;
+}
+
+pre.badged {
+    margin-bottom: 3px;
+}
+
+.badge {
+    display: block;
+    margin-bottom: 30px;
 }
 
 .dot { border-top: 1px dotted #000; }
@@ -266,6 +288,11 @@ body {
     left: 0;
     border-top: 1px solid black;
     padding: 45px 100px 45px 20px;
+}
+
+.subsection {
+    border-top: 1px dotted black;
+    padding-top: 30px;
 }
 
 .column-1 {
