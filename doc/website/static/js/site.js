@@ -342,7 +342,7 @@
       url: gateway,
       data: { since: since },
       dataType: 'json',
-      cache: 'false',
+      cache: false,
       timeout: 90000,
 
       success: callback,
