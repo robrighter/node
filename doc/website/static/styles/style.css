@@ -43,6 +43,7 @@ ol ul, ul ol {
 }
 
 pre, code {
+    z-index: 10;
     font-family: "Monaco", Courier New, Courier, monospace;
 }
 
@@ -275,7 +276,7 @@ body {
 }
 
 #wrapper {
-    background: url('../images/wrapperbg.png') #e8e8e8;
+    background: url('../images/wrapperbg.png') #e8e8e8 fixed;
     display: block;
     width: 1070px;
     min-height: 900px; /* FIXME: why is this here? */
@@ -351,7 +352,7 @@ body {
     text-decoration: none;
 }
 
-.navitem a:hover {
+.navitem a:hover, .navitem .active {
     text-decoration: underline;
 }
 
@@ -618,59 +619,212 @@ div#maincontent {
     padding-right: 20px;
 }
 
-ul#documentation {
-    cursor: pointer;
+/* --- Documentation --- */
+
+#man {
+    margin-left: 270px;
 }
 
-ul#documentation li, ul#documentation li ul li{
-    list-style: none;
-    font-size: 10px;
+#man-sidebar {
+    width: 203px;
+    float: left;
+    margin-top: 3px;
 }
 
-ul#documentation li ul {
-    margin: 10px -20px -10px -20px;
+#man-sidebar .shadow, #man-sidebar .shadowed {
+    width: 193px;
 }
 
-ul#documentation li ul li {
-    border-top: 1px dotted #666;
-    border-bottom: none;
-    padding-left: 30px;
+#print-documentation {
+    margin-top: 18px;
 }
 
-ul#documentation li {
-    border-bottom: 1px #666 dotted;
-    padding: 10px 20px;
+#toc {
 }
 
-ul#documentation li strong {
+#toc ul {
+    text-transform: uppercase;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+#toc .level-2 ul {
+    border-top: 1px dotted black;
+    margin-top: 5px;
+    text-transform: none;
+    display: none;
+}
+
+#toc li {
+    border-top: 1px dotted black;
+    padding: 3px 0px;
+}
+
+#toc li.first {
+    border-top: none;
+}
+
+#toc a {
+    text-decoration: none;
+    letter-spacing: -0.5px;
+}
+
+#toc a:hover, #toc a.expanded {
     font-weight: bold;
-    margin-left: -12px;
-    margin-right: 5px;
-}
-.navitem .active {
-    text-decoration: underline;
+    color: black;
 }
 
-#documentation_content div {
-    position: relative;
+#toc .toggle {
+    display: block;
+    float: left;
+    visibility: hidden;
+    width: 21px;
+    text-align: center;
 }
 
-#documentation_content div .nametags {
+#toc .more {
+    visibility: visible;
+}
+
+#man h2 {
+    font-weight: bold;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+#man .header {
+    margin: 54px 0 36px 0;
+    border-top: 1px dotted black;
+    text-align: right;
+}
+
+#man .header .title, #man .header .nav {
+    display: inline;
+    border: 1px solid #aaa;
+    border-top: none;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    padding: 6px 10px;
+}
+
+#man .header .title {
+    text-transform: uppercase;
+    margin-right: 3px;
+}
+
+#man .header .sep {
+    padding: 0px 5px;
+}
+
+#man .header .nav {
+
+}
+
+#man #current-section {
+    z-index: 20;
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 0;
+    width: 970px;
+    border: none;
+}
+
+#current-section .title, #current-section .nav {
+    background-color: #e8e8e8;
+}
+
+#man #last-header {
+    margin: 0;
+    border: none;
+    visibility: hidden;
+}
+
+#editor {
+    display: none;
+    z-index: 1000;
     position: absolute;
-    top: 0px;
-    right: 0px;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 1560px;
 }
-#documentation_content div .nametags span {
-    border-left: 1px #666 solid;
-    border-right: 1px #666 solid;
-    border-bottom: 1px #666 solid;
-    margin-left: 10px;
+
+#editor .overlay {
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+
+#editor .content {
+    position: absolute;
+    top: 50px;
+    left: 47px;
+}
+
+#editor textarea, #editor .preview {
+    display: block;
+    float: left;
+    border: none;
+    background-color: #e8e8e8;
+    height: 706px;
+    width: 718px;
+    overflow: auto;
+}
+
+#editor .preview {
+    margin-left: 23px;
+}
+
+#editor .patch {
+    clear: left;
+    float: left;
+    margin-top: 9px;
     position: relative;
-    top: 6px;
-    padding: 8px 8px 8px 8px;
-    font-size: 8pt;
+    top: 0;
+    left: 0;
 }
-#documentation_content div .nametags span.docname {
-    top: 5px;
-    padding-bottom: 10px;
+
+#editor .inputs {
+    margin: 10px 9px;
+    position: relative;
+    z-index: 10;
+}
+
+#editor .background {
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#editor .buttons {
+    float: right;
+    text-align: right;
+    margin-top: 19px;
+}
+
+#editor .text {
+    border: none;
+    margin-right: 6px;
+    font-size: 12px;
+    padding: 8px;
+    width: 151px;
+}
+
+#editor .button {
+    border: none;
+    background-color: black;
+    color: white;
+    margin-left: 4px;
+    font-size: 12px;
+    padding: 7px 10px;
 }

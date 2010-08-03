@@ -7,15 +7,7 @@
   });
 
   function ui() {
-    $("ul#documentation li ul").hide();
-    $("ul#documentation li").click(function(){
-      if ($(this).hasClass('open')){
-        $(this).children("ul").slideUp().end().removeClass('open strong').children("strong").html('+');
-      }
-      else if ($(this).children().length > 1){
-        $(this).children("ul").slideDown().end().addClass('open strong').children("strong").html('-');
-      }
-    });
+    $('#toc').each(table_of_contents);
 
     if ($("#wrapper").height() < $(window).height()){
       $("#wrapper").css({
@@ -66,6 +58,228 @@
     activate.toggle(show, hide);
 
     return this;
+  }
+
+  
+  /// --- Table of Contents
+
+  function table_of_contents() {
+    var context = $('<ul/>').appendTo(this),
+        depth = 2,
+        last = undefined,
+        editor = buildEditor(savePatch);
+
+    $('h2, h3').each(entry);
+    $(this)
+      .find('li:first-child').addClass('first').end()
+      .find('.more').click(toggle).end()
+      .find('.name').click(scrollTo);
+    $('.top').live('click', scrollTop);
+    $('.edit').live('click', editSection(editor));
+    navUpdater();
+
+    function entry(index) {
+      var head = $(this),
+          id = identify(head, index),
+          name = title(head),
+          level = parseInt(this.tagName.substr(1, 2));
+
+      if (last && last.children('.name').text() == name)
+        return;
+
+      if (last && head.is('h2')) {
+        head = header(name).insertBefore(head);
+      }
+
+      head.attr('id', id);
+
+      var entry = $('<li/>')
+        .addClass('level-' + level)
+        .append('<a href="#" class="toggle">+</a>')
+        .append($('<a class="name"/>').attr('href', '#' + id).text(name));
+
+      if (level > depth) {
+        context = $('<ul/>').appendTo(last);
+        last.children('.toggle').addClass('more');
+      }
+      else if (depth > level) {
+        context = context.parent().parent();
+      }
+
+      context.append(entry);
+      last = entry;
+      depth = level;
+    }
+
+    function identify(head, index) {
+      return head.text()
+        .replace(/\(.*\)$/gi, '')
+        .replace(/[\s\.]+/gi, '-')
+        .replace(/('|"|:)/gi, '')
+        .toLowerCase() + '-' + index;
+    }
+
+    function header(name) {
+      return $('<div class="header"/>')
+        .append($('<div class="title"/>').text(name))
+        .append($(
+          '<div class="nav">'
+          + '<a href="#" class="edit">Edit</a>'
+          + '<span class="sep">|</span>'
+          + '<a href="#" class="top">Back to Top</a>'
+          + '</div>'));
+    }
+
+    function title(head) {
+      return head.text().replace(/\(.*\)$/gi, '');
+    }
+
+    function toggle(evt) {
+      var self = $(this),
+          more = self.siblings('ul'),
+          links = self.siblings('a').andSelf();
+
+      evt.preventDefault();
+      more.slideToggle('fast', function() {
+        if (more.is(':visible')) {
+          self.text('-');
+          links.addClass('expanded');
+        }
+        else {
+          self.text('+');
+          links.removeClass('expanded');
+        }
+      });
+    }
+
+    function scrollTo(ev) {
+      smoothScroll($(this.hash));
+    }
+
+    function scrollTop(ev) {
+      smoothScroll(-1);
+    }
+
+    function smoothScroll(elem) {
+      $('html').animate({
+        scrollTop: (typeof elem == 'number' ? elem : elem.offset().top) + 2
+      }, 'fast');
+    }
+
+    function mainView() {
+      return ($.browser.webkit) ? $('body') : $('html');
+    }
+
+    function navUpdater() {
+      var headers = $('.header:gt(0)'),
+          view = mainView(),
+          current = $('#current-section'),
+          index = -1,
+          last = 0;
+
+      setInterval(function() {
+        var top = view.attr('scrollTop');
+        if (top != last)
+          update(top);
+      }, 100);
+
+      function draw(header) {
+        if (!header)
+          current.empty().data('showing', '').hide();
+        else if (current.data('showing') != header.id)
+          current.html(header.innerHTML).data('showing', header.id).show();
+      }
+
+      function update(top) {
+        var idx = Math.max(0, index);
+        if (top < $(headers[0]).offset().top)
+          index = -1;
+        else if (top < last)
+          for (idx; idx > 0; idx--) {
+            if ($(headers[idx]).offset().top < top) {
+              index = idx;
+              break;
+            }
+          }
+        else
+          for (idx; idx < headers.length; idx++) {
+            if ($(headers[idx]).offset().top > top) {
+              index = idx - 1;
+              break;
+            }
+          }
+        last = top;
+        draw(headers[index]);
+      }
+    }
+
+    function buildEditor(submit) {
+      var editor = $('<div id="editor"><div class="overlay"/></div>').appendTo('body'),
+          content = $('<div class="content" />').appendTo(editor),
+          form = $('<form />').appendTo(content),
+          markup = $('<textarea name="markup" class="markup" />').appendTo(form),
+          preview = $('<div class="preview" />').appendTo(form),
+          patch = $('<div class="patch" />').appendTo(form),
+          buttons = $('<div class="buttons" />').appendTo(form),
+          close = $('<input type="button" class="button close" value="[x] Cancel" />').appendTo(buttons),
+          exports = {};
+
+      submit && form.submit(submit);
+
+      patch
+        .append($('<div class="inputs" />')
+            .append(labeledInput('name', 'Your Name'))
+            .append(labeledInput('email', 'Email'))
+            .append('<input type="submit" class="button submit" value="Submit Patch" />'))
+        .append('<div class="background" />');
+
+
+      exports.show = function() {
+        editor.height($('body').height()).show();
+        content.css('top', parseInt(mainView().attr('scrollTop')) + 50);
+        $(document).keyup(keyup);
+        return exports;
+      };
+
+      close.bind('click', exports.close = function() {
+        editor.hide();
+        $(document).unbind('keyup', keyup);
+        return exports;
+      });
+
+      function keyup(ev) {
+        if (ev.which == 27)
+          exports.close();
+      }
+
+      return exports;
+    }
+
+    function editSection(editor) {
+      return function(ev) {
+        ev.preventDefault();
+        editor.show();
+      };
+    }
+
+    function savePatch(ev) {
+      ev.preventDefault();
+    }
+  }
+
+  function labeledInput(name, label) {
+    var input = $('<input type="text" class="text" />').addClass(name).attr({
+        name: name,
+        value: label
+      }).focus(function() {
+        if (input.val() == label)
+          input.val('');
+      }).blur(function() {
+        if (input.val() == '')
+          input.val(label);
+      });
+
+    return input;
   }
 
   
