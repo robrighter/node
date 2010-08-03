@@ -69,7 +69,7 @@
     $(this)
       .find('li:first-child').addClass('first').end()
       .find('.more').click(toggle).end()
-      .find('.name').click(scrollTo);
+      .find('.name').click(expandAndScroll);
 
     // Vivify headers.
     $('.top').live('click', scrollTop);
@@ -158,11 +158,14 @@
      * Show / hide nested navigation elements.
      */
     function toggle(evt) {
-      var self = $(this),
-          more = self.siblings('ul'),
+      evt.preventDefault();
+      slideToggle($(this));
+    }
+
+    function slideToggle(self) {
+      var more = self.siblings('ul'),
           links = self.siblings('a').andSelf();
 
-      evt.preventDefault();
       more.slideToggle('fast', function() {
         if (more.is(':visible')) {
           self.text('-');
@@ -173,6 +176,14 @@
           links.removeClass('expanded');
         }
       });
+    }
+
+    function expandAndScroll(ev) {
+      var self = $(this);
+
+      scrollTo.call(this, ev);
+      if (!self.is('.expanded'))
+        slideToggle(self.siblings('.more'));
     }
 
     /**
@@ -354,16 +365,22 @@
    * Show or hide the IRC console.
    */
   function toggleIRC(ev) {
-    var collapse = '1px';
-    var expand =  '370px';
-    var duration = '1000';
-    var moveto = isIrcExpanded() ? collapse : expand;
+    var height;
 
     ev.preventDefault();
+    if (isIrcExpanded()) {
+      height = '1px';
+      this.innerText = 'Read  the IRC Channel';
+    }
+    else {
+      height = '370px';
+      this.innerText = 'Hide the IRC Channel';
+    }
+
     $('#irc').animate({
-        height: moveto,
+        height: height,
         scrollTop: $('#irc .console').attr("scrollHeight")
-    }, duration);
+    }, 1000);
   }
 
   /**

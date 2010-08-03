@@ -296,11 +296,9 @@ pre.badged {
     text-decoration: underline;
 }
 
-#toggleirc img {
-    width: 12px;
-    height: 11px;
-    margin-bottom: -3px;
-    margin-right: -2;
+#toggleirc {
+    padding-left: 16px;
+    background: url(/images/ircbubble.png) no-repeat 0px 1px;
 }
 
 #irc {
