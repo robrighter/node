@@ -7,43 +7,35 @@
   });
 
   function ui() {
-    $('#toc').each(table_of_contents);
+    $('#toc').each(makeTOC);
+    adjustHeight();
+    activeLinks();
+    $('.bubble').each(makeBubble);
+  }
 
-    if ($("#wrapper").height() < $(window).height()){
-      $("#wrapper").css({
-        "height" : $(window).height()
-      });
-    }
+  function adjustHeight() {
+    var wrap = $('#wrapper'),
+        height = $(window).height();
 
-    $("a").each(function(){
-      var locindex = window.location.href.split('/').length -1;
-      var thelocation = window.location.href.split('/')[locindex];
-      if ( ($(this).attr('href') != '#') && ($(this).attr('href').substr(1) == thelocation || $(this).attr('href') == thelocation))
-             $(this).addClass('active');
+    if (wrap.height() < height)
+      wrap.css('height', height);
+  }
+
+  function activeLinks() {
+    var parts = window.location.href.split('/'),
+        here = parts[parts.length - 1];
+
+    $("a").each(function() {
+      var href = this.href;
+      if ((href != '#') && (href.substr(1) == here || href == here))
+        $(this).addClass('active');
     });
-
-    $('#toggleirc').click(function(){
-        toggleIrc();
-        return false;
-    });
-
-    $('.bubble').each(bubble);
-
-    function toggleIrc(){
-      var collapse = '1px';
-      var expand =  '370px';
-      var duration = '1000';
-      var moveto = isIrcExpanded() ? collapse : expand;
-      $('#irc').animate({ height: moveto, scrollTop: $('#irc .console').attr("scrollHeight") }, duration);
-      return false;
-    }
-
   }
 
   
   /// --- Bubble
 
-  function bubble() {
+  function makeBubble() {
     var activate = $('.bubble-activate', this),
         wrap = $('.bubble-wrap', this);
 
@@ -63,36 +55,55 @@
   
   /// --- Table of Contents
 
-  function table_of_contents() {
+  function makeTOC() {
     var context = $('<ul/>').appendTo(this),
         depth = 2,
         last = undefined,
         editor = buildEditor(savePatch);
 
+    // Scan for headers, adding a <div class="header" /> before each
+    // and generate the navigation in context.
     $('h2, h3').each(entry);
+
+    // Vivify navigation.
     $(this)
       .find('li:first-child').addClass('first').end()
       .find('.more').click(toggle).end()
       .find('.name').click(scrollTo);
+
+    // Vivify headers.
     $('.top').live('click', scrollTop);
     $('.edit').live('click', editSection(editor));
+
+    // Watch for scroll events.
     navUpdater();
 
+    /**
+     * For Hn element, create a <div class="header" /> before it and
+     * generate a navigation entry.
+     */
     function entry(index) {
       var head = $(this),
           id = identify(head, index),
           name = title(head),
           level = parseInt(this.tagName.substr(1, 2));
 
+      // Sometimes several variants of a method are listed in a row.
+      // Since the variants all have the same name, skip all but the
+      // first.
       if (last && last.children('.name').text() == name)
         return;
 
+      // Add <div class="header" /> and use it as the anchor-point.
       if (last && head.is('h2')) {
         head = header(name).insertBefore(head);
       }
 
+      // Add the unique identifier to anchor this section.
       head.attr('id', id);
 
+      // Generate the navigation entry.  Be sensitive to changes
+      // between H2 and H3 to keep the nesting correct.
       var entry = $('<li/>')
         .addClass('level-' + level)
         .append('<a href="#" class="toggle">+</a>')
@@ -111,6 +122,9 @@
       depth = level;
     }
 
+    /**
+     * Make a unique identifier for this header.
+     */
     function identify(head, index) {
       return head.text()
         .replace(/\(.*\)$/gi, '')
@@ -119,6 +133,9 @@
         .toLowerCase() + '-' + index;
     }
 
+    /**
+     * Make a <div class="header" /> for a Hn element.
+     */
     function header(name) {
       return $('<div class="header"/>')
         .append($('<div class="title"/>').text(name))
@@ -130,10 +147,16 @@
           + '</div>'));
     }
 
+    /**
+     * Extract the best name for a Hn element.
+     */
     function title(head) {
       return head.text().replace(/\(.*\)$/gi, '');
     }
 
+    /**
+     * Show / hide nested navigation elements.
+     */
     function toggle(evt) {
       var self = $(this),
           more = self.siblings('ul'),
@@ -152,24 +175,41 @@
       });
     }
 
+    /**
+     * Scroll to the link target of an A element.
+     */
     function scrollTo(ev) {
       smoothScroll($(this.hash));
     }
 
+    /**
+     * Scroll all the way up.
+     */
     function scrollTop(ev) {
       smoothScroll(-1);
     }
 
+    /**
+     * Scroll smoothly to an element or offset.
+     */
     function smoothScroll(elem) {
       $('html').animate({
         scrollTop: (typeof elem == 'number' ? elem : elem.offset().top) + 2
       }, 'fast');
     }
 
+    /**
+     * Different browsers use BODY or HTML as the main viewport element.
+     */
     function mainView() {
       return ($.browser.webkit) ? $('body') : $('html');
     }
 
+    /**
+     * Detect scrolling by polling for changes in the vertical offset
+     * of the main viewport element.  When the offset changes, update
+     * the section header fixed to the top of the viewport.
+     */
     function navUpdater() {
       var headers = $('.header:gt(0)'),
           view = mainView(),
@@ -213,6 +253,9 @@
       }
     }
 
+    /**
+     * Create the section editor lightbox.
+     */
     function buildEditor(submit) {
       var editor = $('<div id="editor"><div class="overlay"/></div>').appendTo('body'),
           content = $('<div class="content" />').appendTo(editor),
@@ -255,6 +298,9 @@
       return exports;
     }
 
+    /**
+     * Click event handler for "Edit" A elements.
+     */
     function editSection(editor) {
       return function(ev) {
         ev.preventDefault();
@@ -262,11 +308,18 @@
       };
     }
 
+    /**
+     * Submit handler for editor.
+     */
     function savePatch(ev) {
       ev.preventDefault();
     }
   }
 
+  /**
+   * Make a text input with its label as the initial value.  On focus,
+   * hide the label.
+   */
   function labeledInput(name, label) {
     var input = $('<input type="text" class="text" />').addClass(name).attr({
         name: name,
@@ -294,6 +347,45 @@
    */
   function irc() {
     $('#irc .console').each(console);
+    $('#toggleirc').click(toggleIRC);
+  }
+
+  /**
+   * Show or hide the IRC console.
+   */
+  function toggleIRC(ev) {
+    var collapse = '1px';
+    var expand =  '370px';
+    var duration = '1000';
+    var moveto = isIrcExpanded() ? collapse : expand;
+
+    ev.preventDefault();
+    $('#irc').animate({
+        height: moveto,
+        scrollTop: $('#irc .console').attr("scrollHeight")
+    }, duration);
+  }
+
+  /**
+   * When someone issues the "theme" command to the webbot, this
+   * procedure is called.
+   */
+  function setTheme(name){
+    $('body').attr('class', name);
+  }
+
+  /**
+   * Called when long-polling fails.
+   */
+  function ircUnavailable(){
+    $('#toggleirc').parent().fadeOut('slow');
+  }
+
+  /**
+   * Return true if the IRC console is visible.
+   */
+  function isIrcExpanded(){
+    return $('#irc').css('height') != '1px';
   }
 
   /**
@@ -444,14 +536,3 @@
 })(jQuery);
 
 /// --- Globals
-function setTheme(name){
-   $('body').attr('class', name);
-}
-
-function ircUnavailable(){
-    // $('#toggleirc').parent().fadeOut('slow');
-}
-
-function isIrcExpanded(){
-    return ($('#irc').css('height') != '1px');
-}

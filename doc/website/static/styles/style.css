@@ -1,7 +1,18 @@
+/* --- General --- */
+
 body {
     font-family: arial, helvetica, sans-serif;
     font-size: 1em;
     line-height: 1.2em;
+    background: url('../images/bg.png') fixed repeat;
+    background-color: #777;
+    height: 100%;
+}
+
+#wrapper {
+    background: url('../images/wrapperbg.png') #e8e8e8 fixed;
+    display: block;
+    width: 1070px;
 }
 
 p em, em {
@@ -75,8 +86,6 @@ h6 {
 
 }
 
-
-
 a {
     color: #000;
     text-decoration: none;
@@ -86,6 +95,9 @@ a:hover {
     text-decoration: underline;
 }
 
+
+/* --- IRC Themes --- */
+
 .blue .themetext, .blue .themetext a, .blue p a:hover, .blue li a:hover, .blue #irc .console time, .blue #irc .console .who, .blue #irc .console .info {
     color: #0000c0;
 }
@@ -93,7 +105,6 @@ a:hover {
 .blue .themebackground {
     background-color: #0000c0;
 }
-
 
 .green .themetext, .green .themetext a, .green p a:hover, .green li a:hover, .green #irc .green time, .green #irc .console .who, .green #irc .console .info  {
     color: #008000;
@@ -116,6 +127,9 @@ a:hover {
     display: block;
     z-index: 500;
 }
+
+
+/* --- Drop Shadow: box and bubble --- */
 
 .shadowed, .bubble-content {
     background-color: #e8e8e8;
@@ -175,6 +189,9 @@ a:hover {
     height: 26px;
 }
 
+
+/* --- Code --- */
+
 pre {
     margin: 0 0 15px 0;
     position: relative;
@@ -202,20 +219,8 @@ pre.badged {
     margin-bottom: 30px;
 }
 
-.dot { border-top: 1px dotted #000; }
-
-body {
-    background: url('../images/bg.png') fixed repeat;
-    background-color: #777;
-    height: 100%;
-}
-
-#wrapper {
-    background: url('../images/wrapperbg.png') #e8e8e8 fixed;
-    display: block;
-    width: 1070px;
-    min-height: 900px; /* FIXME: why is this here? */
-}
+
+/* --- Document Structure --- */
 
 .section {
     clear: both;
@@ -319,7 +324,6 @@ body {
     line-height: 15px;
 }
 
-
 #irc .console time {
     margin-right: 0.5em;
 }
@@ -358,7 +362,7 @@ body {
 }
 
 
-/* --- HOME --- */
+/* --- Home --- */
 
 .example {
     border-top: 1px dotted black;
@@ -545,14 +549,7 @@ body {
     clear: both;
 }
 
-div.resourceli, div.resourceli p {
-    font-size: 12px;
-}
-div#maincontent {
-    width: 680px;
-    padding-right: 20px;
-}
-
+
 /* --- Documentation --- */
 
 #man {
