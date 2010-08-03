@@ -1,6 +1,3 @@
-/*----------------------*/
-/*------TYPOGRAPHY------*/
-/*----------------------*/
 body {
     font-family: arial, helvetica, sans-serif;
     font-size: 1em;
@@ -47,7 +44,6 @@ pre, code {
     font-family: "Monaco", Courier New, Courier, monospace;
 }
 
-/*Typography*/
 h1, h2, h3, h4, h5, h6 {
     font-family: Helvetica, arial, sans-serif;
 }
@@ -90,26 +86,6 @@ a:hover {
     text-decoration: underline;
 }
 
-/*----------------------*/
-/*-------TOOLBOX--------*/
-/*----------------------*/
-.floatleft {
-    float: left;
-}
-
-.floatright {
-    float: right;
-}
-
-.hidden {
-    display: none;
-}
-
-.clearboth {
-    clear: both;
-}
-
-
 .blue .themetext, .blue .themetext a, .blue p a:hover, .blue li a:hover, .blue #irc .console time, .blue #irc .console .who, .blue #irc .console .info {
     color: #0000c0;
 }
@@ -134,16 +110,6 @@ a:hover {
 .red .themetext, .red .themetext a, .red p a:hover, .red li a:hover, .red #irc .console time, .red #irc .console .who, .red #irc .console .info {
     color: #da0000;
 }
-
-.notext {
-    text-indent: -9999px;
-}
-.strong {
-    font-weight: bold;
-}
-/*----------------------*/
-/*---Utility Classes----*/
-/*----------------------*/
 
 .shadow, .bubble-wrap {
     background: url('../images/bg.png') fixed;
@@ -238,39 +204,8 @@ pre.badged {
 
 .dot { border-top: 1px dotted #000; }
 
-.mono, .mono.small { font-family: "Monaco", Courier New, Courier, monospace; }
-.small, pre, .small span { font-size: 10px; }
-.uppercase { text-transform: uppercase; }
-
-.right-20 { margin-right: -20px; }
-.left-20 { margin-left: -20px; }
-
-.top10 { position: relative; top: 10px; }
-.top14 { margin-top: 14px; padding-top: 14px; line-height: 1em; }
-.top20 { margin-top: 0px; padding-top: 20px;}
-.top30 { margin-top: 30px; padding-top: 30px; }
-.top46 { margin-top: 46px; padding-top: 46px; }
-
-.bottom14{ margin-bottom: 14px; }
-.bottom30{ margin-bottom: 30px; }
-.bottom46{ margin-bottom: 46px; }
-
-.w660 { width: 660px; }
-.w542 { width: 542px; }
-.w368 { width: 368px; }
-.w270 { width: 270px; }
-.w174 { width: 174px; }
-.ml20 { margin-left: 20px; }
-.mr20 { margin-right: 20px; }
-.pl20 { padding-left: 20px; }
-.pr20 { padding-right: 20px; }
-
-/*----------------------*/
-/*------STRUCTURE-------*/
-/*----------------------*/
-
 body {
-    /* background: url('../images/bg.png') fixed repeat; */
+    background: url('../images/bg.png') fixed repeat;
     background-color: #777;
     height: 100%;
 }
@@ -422,9 +357,8 @@ body {
     font-size: 11px;
 }
 
-/*----------------------*/
-/*--------HOME----------*/
-/*----------------------*/
+
+/* --- HOME --- */
 
 .example {
     border-top: 1px dotted black;
