@@ -78,6 +78,9 @@
     // Watch for scroll events.
     navUpdater();
 
+    // Watch for browser resizing
+    $(window).resize(tocScrollBar).resize();
+
     /**
      * For Hn element, create a <div class="header" /> before it and
      * generate a navigation entry.
@@ -175,6 +178,7 @@
           self.text('+');
           links.removeClass('expanded');
         }
+        tocScrollBar();
       });
     }
 
@@ -204,9 +208,27 @@
      * Scroll smoothly to an element or offset.
      */
     function smoothScroll(elem) {
-      $('html').animate({
-        scrollTop: (typeof elem == 'number' ? elem : elem.offset().top) + 2
+      mainView().animate({
+        scrollTop: (typeof elem == 'number' ? elem : elem.offset().top) + 1
       }, 'fast');
+    }
+
+    function tocScrollBar() {
+      var area = $('#man-sidebar'),
+          areaTop = area.offset().top,
+          areaBottom = areaTop + area.height(),
+          view = mainView(),
+          viewTop = view.attr('scrollTop'),
+          viewBottom = viewTop + $(window).height();
+
+      window.console.debug('scrollbar?', areaTop, viewTop, areaBottom, viewBottom);
+
+      if ((areaTop < viewTop) || (areaBottom > viewBottom)) {
+        window.console.debug('SCROLL');
+      }
+      else {
+        window.console.debug('DONT SCROLL');
+      }
     }
 
     /**
@@ -223,16 +245,21 @@
      */
     function navUpdater() {
       var headers = $('.header:gt(0)'),
+          sidebar = $('#man-sidebar'),
+          sidebarDefault = sidebar.offset().top,
           view = mainView(),
           current = $('#current-section'),
           index = -1,
           last = 0;
 
-      setInterval(function() {
+      $(window).scroll(function() {
         var top = view.attr('scrollTop');
-        if (top != last)
-          update(top);
-      }, 100);
+        if (top != last) {
+          updateHeader(top);
+          updateSidebar(top);
+          last = top;
+        }
+      });
 
       function draw(header) {
         if (!header)
@@ -241,13 +268,13 @@
           current.html(header.innerHTML).data('showing', header.id).show();
       }
 
-      function update(top) {
+      function updateHeader(top) {
         var idx = Math.max(0, index);
         if (top < $(headers[0]).offset().top)
           index = -1;
         else if (top < last)
           for (idx; idx > 0; idx--) {
-            if ($(headers[idx]).offset().top < top) {
+            if ($(headers[idx]).offset().top <= top) {
               index = idx;
               break;
             }
@@ -259,8 +286,14 @@
               break;
             }
           }
-        last = top;
         draw(headers[index]);
+      }
+
+      function updateSidebar(top) {
+        if (top > sidebarDefault)
+          sidebar.addClass('fixed-sidebar');
+        else
+          sidebar.removeClass('fixed-sidebar');
       }
     }
 

@@ -560,6 +560,12 @@ pre.badged {
     margin-top: 3px;
 }
 
+.fixed-sidebar {
+    position: fixed;
+    top: 16px;
+    left: 20px;
+}
+
 #man-sidebar .shadow, #man-sidebar .shadowed {
     width: 193px;
 }
