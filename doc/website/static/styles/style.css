@@ -134,9 +134,6 @@ a:hover {
 .shadowed, .bubble-content {
     background-color: #e8e8e8;
     border: 1px solid #000;
-    position: relative;
-    top: -10px;
-    left: -10px;
     z-index: 600;
 }
 
@@ -327,6 +324,7 @@ pre.badged {
 }
 
 #content {
+    padding-top: 29px; 
     padding-bottom: 16px;
 }
 
@@ -551,17 +549,20 @@ pre.badged {
 /* --- Documentation --- */
 
 #man {
+    margin-top: 16px; 
     margin-left: 270px;
 }
 
 #man-sidebar {
-    width: 203px;
+    width: 218px;
     float: left;
     margin-top: 3px;
+    top: 16px;
+    position: relative;
 }
 
 .fixed-sidebar {
-    position: fixed;
+    position: fixed !important;
     top: 16px;
     left: 20px;
 }
@@ -763,3 +764,13 @@ pre.badged {
     font-size: 12px;
     padding: 7px 10px;
 }
+
+/* ==================== */
+/* ! CUSTOM SCROLLBAR   */
+/* ==================== */
+.jScrollPaneContainer { position: relative; top: -10px; left: -10px; overflow: hidden; padding-left: 10px; z-index: 1; }
+.jScrollPaneContainer #toc { width: 188px !important; left: 0 !important; }
+.jScrollPaneTrack { position: fixed; cursor: pointer; overflow: hidden; top: 29px; left: 223px; height: 100%; background: #999; }
+.jScrollPaneDrag { position: absolute; background: #000; cursor: pointer; overflow: hidden; }
+.jScrollPaneDragTop { position: absolute; top: 0; left: 0; overflow: hidden; }
+.jScrollPaneDragBottom { position: absolute; bottom: 0; left: 0; overflow: hidden; }
