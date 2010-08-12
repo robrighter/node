@@ -329,13 +329,20 @@
       }
       
       function updateSidebar(top) {
-        if (top > sidebarDefault)
-          sidebar.addClass('fixed-sidebar');
-        else {
-          sidebar.removeClass('fixed-sidebar');
+        if (top > sidebarDefault) {
+          if (!sidebar.hasClass('fixed-sidebar')) {
+            sidebar.addClass('fixed-sidebar');
           
-          // Remove scrollbar simply by calling the check
-          adjustTocHeight();
+            // Make sure scrollbar doesn't need to be added
+            adjustTocHeight();
+          }
+        } else {
+          if (sidebar.hasClass('fixed-sidebar')) {
+            sidebar.removeClass('fixed-sidebar');
+          
+            // Remove scrollbar simply by calling the check
+            adjustTocHeight();
+          }
         }
       }
     }
@@ -365,8 +372,14 @@
 
 
       exports.show = function() {
+
         editor.height($('body').height()).show();
-        content.css('top', parseInt(mainView().attr('scrollTop')) + 50);
+        // Start off in middle
+        content.add(form).css({
+          'top': parseInt(mainView().attr('scrollTop')) + 50,
+          height: $(window).height() - 100,
+          width: $(window).width() - 100
+        });
         $(document).keyup(keyup);
         return exports;
       };
@@ -381,7 +394,15 @@
         if (ev.which == 27)
           exports.close();
       }
-
+      
+      $(window).resize(function() {
+        content.add(form).css({
+          'top': parseInt(mainView().attr('scrollTop')) + 50,
+          height: $(window).height() - 100,
+          width: $(window).width() - 100
+        });
+      });
+      
       return exports;
     }
 

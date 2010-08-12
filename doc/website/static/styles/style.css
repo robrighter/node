@@ -685,7 +685,7 @@ pre.badged {
     top: 0;
     left: 0;
     height: 100%;
-    width: 1560px;
+    width: 100%;
 }
 
 #editor .overlay {
@@ -707,13 +707,13 @@ pre.badged {
     float: left;
     border: none;
     background-color: #e8e8e8;
-    height: 706px;
-    width: 718px;
+    height: 90%;
+    width: 48%;
     overflow: auto;
 }
 
 #editor .preview {
-    margin-left: 23px;
+    float: right;
 }
 
 #editor .patch {
@@ -763,6 +763,7 @@ pre.badged {
     margin-left: 4px;
     font-size: 12px;
     padding: 7px 10px;
+    cursor: pointer;
 }
 
 /* ==================== */

@@ -215,7 +215,6 @@ window['_pr_isIE6'] = function () {
       // expression immediately follows another since a regular expression may
       // have flags for case-sensitivity and the like.  Having regexp tokens
       // adjacent is not valid in any language I'm aware of, so I'm punting.
-      // TODO: maybe style special characters inside a regexp as punctuation.
     }();
 
   // Define regexps here so that the interpreter doesn't have to create an
@@ -538,7 +537,6 @@ window['_pr_isIE6'] = function () {
           if (p.length >= 2 && ch0 === '[') {
             parts[i] = caseFoldCharset(p);
           } else if (ch0 !== '\\') {
-            // TODO: handle letters in numeric escapes.
             parts[i] = p.replace(
                 /[a-zA-Z]/g,
                 function (ch) {
